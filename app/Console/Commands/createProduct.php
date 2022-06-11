@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\ProductService;
+use Illuminate\Console\Command;
 
 class createProduct extends Command
 {
@@ -42,10 +42,10 @@ class createProduct extends Command
             $name = $this->ask('What is the name of the product?');
             $description = $this->ask('What is the description of the product?');
             $price = $this->ask('What is the price of the product?');
-            $category = $this->ask('What is the category of the product?');
+            $category = $this->ask('What is the category of the product?') ?? null;
             $image = $this->ask('What is the image of the product?');
 
-            $productService->create($name, $description,  $price, $image, $category);
+            $productService->create($name, $description, $price, $image, $category);
 
             $this->info('Product created successfully!');
 

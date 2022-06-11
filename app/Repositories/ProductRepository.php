@@ -7,6 +7,11 @@ use App\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
+    public function paginate($perPage = 10)
+    {
+        return Product::paginate($perPage);
+    }
+
     /**
      * delete product
      *
@@ -28,7 +33,7 @@ class ProductRepository implements ProductRepositoryInterface
      * @param integer $category
      * @return Product
      */
-    public function create(string $name, string $description, float $price, string $image, int $category): Product
+    public function create(string $name, string $description, float $price, string $image, int $category = null): Product
     {
         $product = Product::create([
             'name' => $name,

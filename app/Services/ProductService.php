@@ -21,6 +21,11 @@ class ProductService
         $this->imageService = $imageService;
     }
 
+    public function paginate($perPage = 10)
+    {
+        return $this->productRepository->paginate($perPage);
+    }
+
     /**
      * @param integer $id
      * @return integer
@@ -40,9 +45,10 @@ class ProductService
      * @param integer $category
      * @return Product
      */
-    public function create(string $name, string $description, float $price, $image, int $category): Product
+    public function create(string $name, string $description, float $price, $image, int $category = null): Product
     {
-        $imagePath = $this->fileService->store($image);
+        // $imagePath = $this->fileService->store($image);
+        $imagePath = "azazza";
         return $this->productRepository->create($name, $description, $price, $imagePath, $category);
     }
 }

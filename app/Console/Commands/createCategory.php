@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\CategoryService;
+use Illuminate\Console\Command;
 
 class createCategory extends Command
 {
@@ -12,7 +12,7 @@ class createCategory extends Command
      *
      * @var string
      */
-    protected $signature = 'category:create';
+    protected $signature = 'create:category';
 
     /**
      * The console command description.
@@ -40,10 +40,9 @@ class createCategory extends Command
     {
         try {
             $name = $this->ask('What is the name of the category?');
-            $parent_category = $this->ask('What is the description of the product?');
-           
+            $parent_category = $this->ask('What is the parent category of the category?') ?? null;
 
-            $categoryService->create($name, $parent_category=null);
+            $categoryService->create($name, $parent_category);
 
             $this->info('Product created successfully!');
 
