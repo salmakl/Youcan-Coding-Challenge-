@@ -18,7 +18,7 @@ class ProductService
     public function __construct(ProductRepository $productRepository, ImageService $imageService)
     {
         $this->productRepository = $productRepository;
-        $this->fileService = $imageService;
+        $this->imageService = $imageService;
     }
 
     /**

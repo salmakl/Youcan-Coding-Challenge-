@@ -15,7 +15,7 @@ class ImageService
     public function store($image)
     {
         $path = Storage::disk('public')->put('images', $image);
-
+        
         return $path;
     }
 }
