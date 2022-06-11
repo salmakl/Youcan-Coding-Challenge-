@@ -11,14 +11,14 @@ class deleteCategory extends Command
      *
      * @var string
      */
-    protected $signature = 'delete:category';
+    protected $signature = 'category:delete {--id=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Delete category by id';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,8 @@ class deleteCategory extends Command
      */
     public function handle()
     {
-        return 0;
+        $id = $this->option('id');
+        $this->categoryService->delete($id);
+        $this->info('Category deleted successfully.');
     }
 }
