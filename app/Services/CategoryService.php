@@ -17,13 +17,13 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-    /**
+     /**
      * @param integer $id
      * @return integer
      */
     public function delete(int $id): int
     {
-        return $this->productRepository->delete($id);
+        return $this->categoryRepository->delete($id);
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoryService
      * @param integer|null $parent_category
      * @return Category
      */
-    public function create(string $name, int $parent_category=null ): Category
+    public function create(string $name, int $parent_category = null): Category
     {
         return $this->categoryRepository->create($name, $parent_category);
     }

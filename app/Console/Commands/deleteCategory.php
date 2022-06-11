@@ -3,15 +3,19 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Services\CategoryService;
+
 
 class deleteCategory extends Command
 {
+    private $categoryService;
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'category:delete {--id=}';
+    protected $signature = 'delete:category {--id=}';
 
     /**
      * The console command description.
@@ -25,9 +29,11 @@ class deleteCategory extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(CategoryService $categoryService)
     {
         parent::__construct();
+        $this->categoryService = $categoryService;
+
     }
 
     /**

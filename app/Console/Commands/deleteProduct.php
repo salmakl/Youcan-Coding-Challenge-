@@ -3,15 +3,17 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Services\ProductService;
 
 class deleteProduct extends Command
 {
+    private $productService;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'product:delete {--id=}';
+    protected $signature = 'delete:product {--id=}';
 
     /**
      * The console command description.
@@ -25,9 +27,10 @@ class deleteProduct extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ProductService $productService)
     {
-        parent::__construct();
+         parent::__construct();
+         $this->productService = $productService;    
     }
 
     /**

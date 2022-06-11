@@ -7,8 +7,8 @@ use App\Models\Category;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    /**
-     * delete Category
+     /**
+     * delete category
      *
      * @param integer $id
      * @return integer
