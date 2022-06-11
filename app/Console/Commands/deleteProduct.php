@@ -11,14 +11,14 @@ class deleteProduct extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'product:delete {--id=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Delete product by id';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,8 @@ class deleteProduct extends Command
      */
     public function handle()
     {
-        return 0;
+        $id = $this->option('id');
+        $this->productService->delete($id);
+        $this->info('Product deleted successfully.');
     }
 }
