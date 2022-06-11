@@ -11,6 +11,17 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::paginate($perPage);
     }
+    /**
+     * get all products with categories
+     *
+     * @return array
+     */
+    public function all(): array
+    {
+        $products = Product::with('categories')->get();
+
+        return $products->toArray();
+    }
 
     /**
      * delete product
@@ -24,26 +35,39 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     /**
-     * create new product
-     *
-     * @param string $name
-     * @param string $description
-     * @param float $price
-     * @param string $image
-     * @param integer $category
+     * @param array $data
+     * @param string $imageName
      * @return Product
      */
-    public function create(string $name, string $description, float $price, string $image, int $category = null): Product
+    public function create(array $data, string $imageName): Product
     {
-        $product = Product::create([
-            'name' => $name,
-            'description' => $description,
-            'price' => $price,
-            'image' => $image,
-        ]);
+        $product = new Product();
 
-        $product->categories()->attach($category);
+        $product->name = $data['name'];
+        $product->price = $data['price'];
+        $product->description = $data['description'];
+        $product->image = $imageName;
+
+        $product->save();
 
         return $product;
+    }
+
+    /**
+     * @param integer $id
+     * @return Product
+     */
+    public function sortByPrice($sort)
+    {
+        return Product::orderBy('price', 'desc')->get();   
+    }
+
+    /**
+     * @param integer $id
+     * @return Product
+     */
+    public function sortByName($sort)
+    {
+        return Product::orderBy('name', 'asc')->get();   
     }
 }

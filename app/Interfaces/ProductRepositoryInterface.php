@@ -8,5 +8,5 @@ interface ProductRepositoryInterface
 {
     public function delete(int $id): int;
 
-    public function create(string $name, string $description, float $price, string $image, int $category): Product;
+    public function create(array $data, string $imageName): Product;
 }
