@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\CategoryService;
-
+use Illuminate\Console\Command;
 
 class deleteCategory extends Command
 {
@@ -33,7 +32,6 @@ class deleteCategory extends Command
     {
         parent::__construct();
         $this->categoryService = $categoryService;
-
     }
 
     /**
@@ -43,8 +41,16 @@ class deleteCategory extends Command
      */
     public function handle()
     {
-        $id = $this->option('id');
-        $this->categoryService->delete($id);
-        $this->info('Category deleted successfully.');
+        try {
+            $id = $this->option('id');
+            $this->categoryService->delete($id);
+            $this->info('Category deleted successfully.');
+
+            return 0;
+        } catch (\Throwable $th) {
+            $this->error('Something went wrong! ' . $th->getMessage());
+
+            return 1;
+        }
     }
 }

@@ -7,20 +7,9 @@ use App\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    public function paginate($perPage = 10)
+    public function paginate()
     {
-        return Product::paginate($perPage);
-    }
-    /**
-     * get all products with categories
-     *
-     * @return array
-     */
-    public function all(): array
-    {
-        $products = Product::with('categories')->get();
-
-        return $products->toArray();
+        return Product::paginate(5);
     }
 
     /**
@@ -41,33 +30,23 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function create(array $data, string $imageName): Product
     {
-        $product = new Product();
-
-        $product->name = $data['name'];
-        $product->price = $data['price'];
-        $product->description = $data['description'];
-        $product->image = $imageName;
-
-        $product->save();
+        $product = Product::create([
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $data['description'],
+            'image' => $imageName,
+        ]);
 
         return $product;
     }
 
-    /**
-     * @param integer $id
-     * @return Product
-     */
-    public function sortByPrice($sort)
+    public function sortByPrice()
     {
-        return Product::orderBy('price', 'desc')->get();   
+        return Product::orderBy('price', 'desc')->paginate(10);
     }
 
-    /**
-     * @param integer $id
-     * @return Product
-     */
-    public function sortByName($sort)
+    public function sortByName()
     {
-        return Product::orderBy('name', 'asc')->get();   
+        return Product::orderBy('name', 'asc')->paginate(10);
     }
 }

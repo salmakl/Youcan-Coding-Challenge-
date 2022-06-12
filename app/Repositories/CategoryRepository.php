@@ -7,7 +7,7 @@ use App\Models\Category;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-     /**
+    /**
      * delete category
      *
      * @param integer $id
@@ -17,7 +17,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return Category::destroy($id);
     }
-    
+
     /**
      * create new Category
      *

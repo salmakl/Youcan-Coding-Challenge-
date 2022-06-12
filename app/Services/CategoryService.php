@@ -17,7 +17,7 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-     /**
+    /**
      * @param integer $id
      * @return integer
      */

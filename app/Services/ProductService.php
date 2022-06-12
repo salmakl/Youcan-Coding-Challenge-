@@ -37,7 +37,7 @@ class ProductService
         return $this->productRepository->delete($id);
     }
 
-      /**
+    /**
      * @param array $data
      *
      * @throws ValidationException
@@ -55,19 +55,9 @@ class ProductService
             throw new ValidationException($validator);
         }
 
-        $imageName = time().'-'.$data['name'].'.'.$data['image']->extension();
+        $imageName = time() . '-' . $data['name'] . '.' . $data['image']->extension();
         $data['image']->move(public_path('images'), $imageName);
 
         $this->productRepository->create($data, $imageName);
-    }
-    
-    /**
-     * display all products
-     *
-     * @return void
-     */
-    public function all()
-    {
-        return $this->productRepository->all();
     }
 }

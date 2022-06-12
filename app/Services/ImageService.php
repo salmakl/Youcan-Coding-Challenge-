@@ -10,12 +10,12 @@ class ImageService
      * store file in storage
      *
      * @param File $image
-     * @return void
+     * @return string
      */
-    public function store($image)
+    public function store($image): string
     {
         $path = Storage::disk('public')->put('images', $image);
-        
+
         return $path;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\ProductService;
+use Illuminate\Console\Command;
 
 class deleteProduct extends Command
 {
@@ -29,8 +29,8 @@ class deleteProduct extends Command
      */
     public function __construct(ProductService $productService)
     {
-         parent::__construct();
-         $this->productService = $productService;    
+        parent::__construct();
+        $this->productService = $productService;
     }
 
     /**
@@ -40,8 +40,16 @@ class deleteProduct extends Command
      */
     public function handle()
     {
-        $id = $this->option('id');
-        $this->productService->delete($id);
-        $this->info('Product deleted successfully.');
+        try {
+            $id = $this->option('id');
+            $this->productService->delete($id);
+            $this->info('Product deleted successfully.');
+
+            return 0;
+        } catch (\Throwable $th) {
+            $this->error('Something went wrong! ' . $th->getMessage());
+
+            return 1;
+        }
     }
 }

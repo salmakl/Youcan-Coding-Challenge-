@@ -49,6 +49,7 @@ class createCategory extends Command
             return 0;
         } catch (\Throwable $th) {
             $this->error('Something went wrong! ' . $th->getMessage());
+
             return 1;
         }
     }
